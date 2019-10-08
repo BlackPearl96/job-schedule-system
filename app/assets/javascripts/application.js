@@ -12,7 +12,6 @@
 //
 //= require jquery3
 //= require jquery_ujs
-//= require turbolinks
 //= require popper
 //= require bootstrap-sprockets
 //= require moment
@@ -27,3 +26,6 @@
 //= require custom
 //= require select2
 //= require date_range_picker
+//= require cable
+//= require chatrooms
+//= require rails_emoji_picker

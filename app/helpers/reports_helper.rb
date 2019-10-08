@@ -3,9 +3,17 @@
 module ReportsHelper
   URI = ENV['uri_slack']
 
-  def call_api_slack(reports, channel)
-    report = reports.includes(:task).map { |r| r.task.title }.join("\n")
-    send_slack_notification(["```#{report}```"].join, channel)
+  def call_api_slack(channel)
+    send_slack_notification(["```#{params[:reports]}```"].join, channel)
+  end
+
+  def report_api
+    @reports.map { |r| [
+                        "<b>Name</b>: #{r.task.title}<br>",
+                        "<b>Permission</b>: #{r.task.color}<br>",
+                        "<b>Start</b>: #{r.task.start}<br>",
+                        "<b>End</b>: #{r.task.end}<br>", "<br>"
+                        ] }.join("\n")
   end
 
   private

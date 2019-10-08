@@ -90,5 +90,5 @@ initialize_calendar = function() {
       $('#calendar').fullCalendar('changeView','agendaDay');
     });
 };
-$(document).on('turbolinks:load', initialize_calendar);
+$(document).ready(initialize_calendar);
 

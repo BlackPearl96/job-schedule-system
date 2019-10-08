@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   enum permission: { close: 0, open: 1 }
   enum role: { user: 0, leader: 1, admin: 2 }
+
   scope :newest, -> { order created_at: :desc }
 
   def self.from_omniauth(auth)
@@ -24,11 +25,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.username = auth.info.name
       user.role = auth.info.is_admin == false ? :user : :admin
+      user.role = auth.info.is_owner == false ? :user : :leader
     end
   end
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 end

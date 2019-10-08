@@ -1,16 +1,8 @@
-.card-body
-  table.table.table-hover.table-striped.table-dark
-    thead
-      th Title
-      th Permission
-      th TimeDate Start
-      th TimeDate End
-    tbody
-      = render @reports
-  = paginate @reports, theme: 'twitter-bootstrap-4'
-
-  = form_tag reports_path, method: :post, style: "float: right" do
-    select.js-example-basic-single[name="channel"]
+- if @reports.any?
+  = form_tag reports_path, method: :post do
+    p.emoji-picker-container
+      = text_area_tag :reports, report_api, class: "form-control text_report", data: { emojiable: true }
+    select.js-example-basic-single[name="channel" required="true"]
       - @channels.each do |channel|
         option = channel.name
     = button_tag "report", class: "btn btn-primary"

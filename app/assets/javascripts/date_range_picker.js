@@ -10,4 +10,4 @@ date_range_picker = function() {
     });
   })
 };
-$(document).on('turbolinks:load', date_range_picker());
+$(document).ready(date_range_picker);

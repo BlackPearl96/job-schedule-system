@@ -1,4 +1,4 @@
-$(document).on "turbolinks:load", ->
+$(document).ready ->
   $("#new_message").on "keypress", (e) ->
     if e.keyCode == 13
       e.preventDefault()

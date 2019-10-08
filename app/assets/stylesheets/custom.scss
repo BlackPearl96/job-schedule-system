@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import "toastr";
 @import "font-awesome";
+@import 'rails_emoji_picker';
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
 .alert-alert {
@@ -54,10 +55,11 @@ div#clock {
 }
 /* messages */
 .name-sender {
-  margin: 0 0 0 90%;
+  margin: 0 0 0 50%;
   font-style: italic;
   font-family: monospace;
   opacity: 0.5;
+  float: right;
 }
 .name-receiveder {
   margin: 0 0 0 10px;
@@ -269,6 +271,7 @@ li.users {
   width: 250px;
   overflow: hidden;
   opacity: 1;
+  z-index: 1000
 }
 .main-menu {
   background: #F7F7F7;
@@ -526,4 +529,27 @@ a.btn.btn-success {
 dd.badge.timeworking {
   font-size: 11px !important;
   padding: 5px 10px;
+}
+
+/* text report */
+.text_report{
+  width: 100%;
+  height: 200px !important;
+  max-height: fit-content;
+ }
+
+.emoji-menu{
+  top: 10px !important;
+  left: 0px;
+  position: absolute;
+  transform: translate3d(1020px, 80px, 80px) !important;
+  z-index: 5002;
+}
+
+.emoji-picker-icon {
+  font-size: 30px !important;
+}
+
+.emoji-picker-container {
+  width: 100%;
 }

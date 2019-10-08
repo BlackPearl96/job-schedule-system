@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RecurringTask < ApplicationRecord
+  attr_accessor :flag
   belongs_to :user
   enum frequency: { weekly: 0, biweekly: 1, monthly: 2, annually: 3 }
 
