@@ -3,10 +3,17 @@
 class SuggestsController < ApplicationController
   def create
     @suggest = current_user.suggests.build suggest_params
-    @suggest.save
-    respond_to do |format|
-      format.js
+    if @suggest.save
+       ActionCable.server.broadcast "messages",
+        message: message.content,
+        user: message.user.username
+      head :ok
+      respond_to do |format|
+        format.js
+      end
     end
+
+
   end
 
   private
