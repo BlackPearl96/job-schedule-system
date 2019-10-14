@@ -1,23 +1,45 @@
-.container.mt-3
-  h2 = t ".title"
-  p = t ".mess"
-  = search_form_for @q do |f|
-    = f.label :name_cont
-    = f.search_field :username_or_email_cont, id: "search_user"
-    = f.submit
-  br
-  table.table.table-striped.table-condensed
-    thead
-      tr
-        th = t ".name"
-        th = t ".email"
-        th = t ".role"
-    tbody#myTable
-      - @users.each do |user|
+- if @chatroom
+  .container.mt-3
+    h2 = t ".title"
+    p = t ".mess"
+    br
+    table.table.table-striped.table-condensed
+      thead
         tr
-          td
-            - next if user.id == current_user.id
-            = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
-              = online_status(user)
-          td = user.email
-          td = user.role
+          th = t ".name"
+          th = t ".email"
+          th = t ".role"
+      tbody#myTable
+        - @users.each do |user|
+          tr
+            td
+              = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
+                = online_status(user)
+            td = user.email
+            td
+              = hidden_field_tag "chatroom_id", "#{@chatroom.id}"
+              = hidden_field_tag "user_id", "#{user.id}"
+              = link_to "ADD", add_user_path(user_id: user.id, chatroom_id: @chatroom.id), method: :post
+- else
+  .container.mt-3
+    h2 = t ".title"
+    p = t ".mess"
+    = search_form_for @q do |f|
+      = f.label :name_cont
+      = f.search_field :username_or_email_cont, id: "search_user"
+      = f.submit
+    br
+    table.table.table-striped.table-condensed
+      thead
+        tr
+          th = t ".name"
+          th = t ".email"
+          th = t ".role"
+      tbody#myTable
+        - @users.each do |user|
+          tr
+            td
+              = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
+                = online_status(user)
+            td = user.email
+            td = user.role

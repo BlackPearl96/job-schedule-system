@@ -26,3 +26,6 @@
                   = last_message(user)
                 - else
                   = t(".message")
+              p
+                - if current_user.admin?
+                  = link_to "Remove", delete_user_path(user_id: user.id, chatroom_id: @chatroom.id), method: :delete

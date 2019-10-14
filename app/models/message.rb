@@ -3,6 +3,7 @@
 class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :user
+  has_many :notification_messages
 
   validates :body, presence: true
 

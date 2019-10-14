@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   match '/users', to: 'users#index', via: 'get'
   post "add_users" , to: "add_users#create", as: "add_user"
+  delete "delete_user/:user_id" , to: "add_users#destroy", as: "delete_user"
   post "direct_messages/:user_id", to: "direct_messages#create"
 
   resources :tasks do

@@ -3,6 +3,7 @@
 class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: %i[show edit update destroy]
   before_action :load_chatrooms
+  before_action :user_in, only: :show
   def index
     @q = Chatroom.public_channels.ransack(params[:q])
     @chatrooms = @q.result.page(params[:page])
@@ -63,5 +64,11 @@ class ChatroomsController < ApplicationController
 
   def load_chatrooms
     @chatrooms = Chatroom.includes(:users).public_channels.page(params[:page]).per(10)
+  end
+
+  def user_in
+    if !@chatroom.users.ids.include?(current_user.id)
+      redirect_to root_path
+    end
   end
 end

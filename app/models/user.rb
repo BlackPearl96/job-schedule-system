@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :suggests
   has_many :notifications
   has_many :holidays
+  has_many :notification_messages
 
   enum permission: { close: 0, open: 1 }
   enum role: { user: 0, leader: 1, admin: 2 }
