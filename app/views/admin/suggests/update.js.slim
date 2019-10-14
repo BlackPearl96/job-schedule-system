@@ -1,2 +1,4 @@
 |
-  $('#suggest-action-#{@suggest.id}').replaceWith('#{j render "admin/suggests/suggest", suggest: @suggest}');
+  $('#admin_user_#{@suggest.user.id} + tr').remove();
+  $('#admin_user_#{@suggest.user.id}').replaceWith('#{j render "admin/users/user", user: @suggest.user}');
+  $('#notification#{@notification.id}').replaceWith('#{j render "admin/notifications/notification", notification: @notification}');

@@ -8,6 +8,7 @@ class WorkingsController < ApplicationController
     working_params.merge!(content: t(".content")) if working_params[:checkin] > Time.parse("08:00:59", Time.now)
     @working = current_user.workings.build working_params
     @working.save
+    WorkingBroadcastJob.perform_later(@working, 1)
     respond_to do |format|
       format.js
     end
@@ -16,7 +17,8 @@ class WorkingsController < ApplicationController
   def update
     current_user.close!
     @working.update checkout: Time.now
-  rescue Exception
+    WorkingBroadcastJob.perform_later(@working, 0)
+  rescue StandardError
     respond_to do |format|
       format.js
     end

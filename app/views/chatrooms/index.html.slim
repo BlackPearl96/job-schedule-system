@@ -4,6 +4,10 @@
   - if current_user.admin?
     form.button_to[method="get"action="chatrooms/new"]
       input.btn.btn-success[value="New Chatrooms" type="submit"]
+  = search_form_for @q do |f|
+    = f.label :name_cont
+    = f.search_field :name_cont, id: "search"
+    = f.submit
   br
   table.table.table-striped.table-condensed
     thead

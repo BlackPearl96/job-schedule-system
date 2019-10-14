@@ -5,7 +5,14 @@ html
       = t ".title-admin"
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "admin/admin_application", media: "all", "data-turbolinks-track": "reload"
-    = javascript_include_tag "admin/admin_application", "data-turbolinks-track": "reload"
+    = stylesheet_link_tag "admin/admin_application", media: "all"
+    = javascript_include_tag "admin/admin_application"
   body
-    = yield
+    = render "shared/flash_messages"
+    = render "shared/menu-admin"
+    #wrapper.d-flex
+      = render "shared/left-admin"
+      .container-fluid
+        button#menu-toggle.btn.btn-primary
+          | Show Menu
+        = yield

@@ -37,4 +37,3 @@
   = link_to t(".show_report"), reports_path, class: "btn btn-success report"
   - unless suggest && suggest.approved? || Time.now.to_datetime > working.checkout.localtime.to_datetime
     = render "static_pages/suggest", suggest: suggest
-

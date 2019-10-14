@@ -36,3 +36,12 @@ nav.main-menu
                     i.fa.fa-align-left.fa-lg
                     span.nav-text
                       = t ".members"
+                      ul
+              li.chatrooms
+                - load_direct_message_rooms.each do |chatroom|
+                  ul
+                    li
+                      - chatroom.users.each do |user|
+                        - next if user.id == current_user.id
+                        = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
+                          = online_status(user)

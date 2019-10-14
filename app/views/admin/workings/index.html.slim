@@ -1,0 +1,22 @@
+.row
+  = date_field_tag(:select_date, Date.today, class: "form-control col-md-2")
+
+table.table.table-striped#accordion
+  thead
+    tr
+      th
+        = t ".id_user"
+      th
+        = t ".user_name"
+      th
+        = t ".email"
+      th
+        = t ".checkin"
+      th
+        = t ".checkout"
+      th
+        = t ".status"
+      th
+        = t ".action"
+  tbody#list_working
+    = render @workings

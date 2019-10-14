@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :chatrooms, through: :chatroom_users
   has_many :messages
   has_many :suggests
+  has_many :notifications
+  has_many :holidays
 
   enum permission: { close: 0, open: 1 }
   enum role: { user: 0, leader: 1, admin: 2 }
@@ -27,5 +29,9 @@ class User < ApplicationRecord
       user.role = auth.info.is_admin == false ? :user : :admin
       user.role = auth.info.is_owner == false ? :user : :leader
     end
+  end
+
+  def self.search_user(search_user)
+    where("lower(users.username) LIKE :search_user", search_user: "%#{search_user}%").distinct
   end
 end

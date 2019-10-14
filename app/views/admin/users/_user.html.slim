@@ -1,4 +1,4 @@
-tr
+tr id="admin_user_#{user.id}"
   td
     = user.id
   td
@@ -36,5 +36,5 @@ tr
               = t ".status"
             th scope="col"
               = t ".action"
-        tbody
-          = render user.suggests.newest
+        tbody#suggest_list
+          = render partial: "admin/suggests/suggest", collection: user.suggests.newest, as: :suggest

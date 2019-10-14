@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.where.not(id: current_user.id)
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
   end
 end

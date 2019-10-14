@@ -1,0 +1,9 @@
+|
+  if($('#notification#{@notification.id} a').hasClass('text-info')){
+    count = parseInt($('#notification-counter').html());
+    $('#notification-counter').html(count - 1);
+  }
+
+  $('#notification#{@notification.id}').replaceWith('#{j render "admin/notifications/notification", notification: @notification}');
+
+  $('#notification#{@notification.id} #suggest').toggleClass("d-none");

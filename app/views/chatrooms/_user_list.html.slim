@@ -1,0 +1,28 @@
+.headind_srch
+  .recent_heading
+    h4
+      = t ".title"
+  .srch_bar
+    .stylish-input-group
+      = form_tag(add_user_path, method: :post) do
+        = hidden_field_tag "chatroom_id", "#{@chatroom.id}"
+        = hidden_field_tag :user_id
+        = text_field_tag :search_user, nil, placeholder: t(".search"), class: "form-control mr-sm-2"
+  .inbox_chat
+    - if @users
+      - @users.each do |user|
+        .chat_list.active_chat
+          .chat_people
+            .chat_img
+              = image_tag "user-profile.png"
+            .chat_ib
+              h5
+                = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
+                  = online_status(user)
+                span.chat_date
+                = strftimes(user)
+              p
+                - if message_present(user)
+                  = last_message(user)
+                - else
+                  = t(".message")

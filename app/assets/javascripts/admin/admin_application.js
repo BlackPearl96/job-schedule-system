@@ -13,6 +13,12 @@
 //= require jquery
 //= require rails-ujs
 //= require bootstrap-sprockets
+//= require moment
+//= require daterangepicker
+//= require bootstrap-datepicker
 //= require activestorage
-//= require turbolinks
+//= require admin/date_range_picker
+//= require admin/notifications
+//= require admin/custom
+//= require cable
 

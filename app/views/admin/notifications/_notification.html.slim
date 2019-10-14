@@ -1,0 +1,17 @@
+li id="notification#{notification.id}"
+  b = notification.suggest.user.username
+  = link_to admin_notification_path(notification), remote: true, method: :put,
+    class: "#{notification.seen? ? 'text-body' : 'text-info'}"
+      = " send a suggest ##{notification.suggest.id} "
+  span
+    = notification.created_at.strftime("%d %b. %Y")
+  div class="a d-none" id="suggest"
+    div
+      i.text-body = notification.suggest.content
+    div
+      - if notification.suggest.waiting?
+        = link_to t(".approved"), admin_suggest_path(notification.suggest, value: :approved), method: :put, remote: true, class: "btn-success notification"
+        = link_to t(".rejected"), admin_suggest_path(notification.suggest, value: :rejected), method: :put, remote: true, class: "btn-danger notification"
+      - else
+        span class="badge badge-#{notification.suggest.approved? ? 'success' : 'danger'} text-white"
+          = notification.suggest.status

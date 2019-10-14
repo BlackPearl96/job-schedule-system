@@ -90,5 +90,6 @@ initialize_calendar = function() {
       $('#calendar').fullCalendar('changeView','agendaDay');
     });
 };
-$(document).ready(initialize_calendar);
-
+$(document).ready(function(){
+  initialize_calendar();
+});

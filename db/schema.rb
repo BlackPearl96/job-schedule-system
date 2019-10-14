@@ -50,12 +50,14 @@ ActiveRecord::Schema.define(version: 2019_10_08_064022) do
   end
 
   create_table "holidays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "title"
     t.datetime "start"
     t.datetime "end"
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_holidays_on_user_id"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,6 +68,16 @@ ActiveRecord::Schema.define(version: 2019_10_08_064022) do
     t.datetime "updated_at", null: false
     t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "suggest_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["suggest_id"], name: "index_notifications_on_suggest_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "recurring_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -104,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_10_08_064022) do
     t.string "title"
     t.datetime "start"
     t.datetime "end"
+    t.integer "progress"
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -144,8 +157,11 @@ ActiveRecord::Schema.define(version: 2019_10_08_064022) do
 
   add_foreign_key "chatroom_users", "chatrooms"
   add_foreign_key "chatroom_users", "users"
+  add_foreign_key "holidays", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "suggests"
+  add_foreign_key "notifications", "users"
   add_foreign_key "recurring_tasks", "users"
   add_foreign_key "reports", "tasks"
   add_foreign_key "reports", "users"

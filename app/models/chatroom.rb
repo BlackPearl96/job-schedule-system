@@ -9,4 +9,8 @@ class Chatroom < ApplicationRecord
 
   scope :public_channels, -> { where(direct_message: false) }
   scope :direct_messages, -> { where(direct_message: true) }
+
+  def self.search(search)
+    where("lower(chatrooms.name) LIKE :search", search: "%#{search}%").distinct
+  end
 end

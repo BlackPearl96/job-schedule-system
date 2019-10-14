@@ -1,0 +1,10 @@
+ul.notificator#notice
+  a#open_notification[href="#"]
+    = render "admin/notifications/counter", counter: notifications.not_seen.count
+  #notificationContainer
+    #notificationTitle
+      | Notifications
+    #notificationsBody.notifications
+      ul#notificationList
+        = render notifications
+    #notificationFooter

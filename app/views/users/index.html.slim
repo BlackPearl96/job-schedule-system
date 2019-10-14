@@ -1,7 +1,10 @@
 .container.mt-3
   h2 = t ".title"
   p = t ".mess"
-  input#myInput.form-control[type="text" placeholder="#{ t(".search-placeholder") }"]
+  = search_form_for @q do |f|
+    = f.label :name_cont
+    = f.search_field :username_or_email_cont, id: "search_user"
+    = f.submit
   br
   table.table.table-striped.table-condensed
     thead
@@ -13,6 +16,7 @@
       - @users.each do |user|
         tr
           td
+            - next if user.id == current_user.id
             = link_to direct_message_path(user), method: :post, data: {behavior: "chatroom-link"} do
               = online_status(user)
           td = user.email

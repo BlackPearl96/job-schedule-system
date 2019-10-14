@@ -1,10 +1,13 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  = link_to "RUBY DEVELOPMENT", root_path, class: "navbar-brand"
+  = link_to t(".title"), root_path, class: "navbar-brand"
   button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.ml-auto
+      li.nav-item
       - if user_signed_in?
+        -if current_user.admin?
+          = link_to "Manager", admin_root_path, class: "nav-link"
         li.nav-item.dropdown
           a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
             = current_user.username

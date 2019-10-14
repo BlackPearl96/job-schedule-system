@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require jquery-ui
 //= require popper
 //= require bootstrap-sprockets
 //= require moment
@@ -25,7 +26,7 @@
 //= require coutdown
 //= require custom
 //= require select2
-//= require date_range_picker
 //= require cable
 //= require chatrooms
+//= require date_range_picker
 //= require rails_emoji_picker

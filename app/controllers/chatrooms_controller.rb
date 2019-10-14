@@ -2,13 +2,15 @@
 
 class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: %i[show edit update destroy]
-
+  before_action :load_chatrooms
   def index
-    @chatrooms = Chatroom.public_channels
+    @q = Chatroom.public_channels.ransack(params[:q])
+    @chatrooms = @q.result.page(params[:page])
   end
 
   def show
     @mess = Message.new
+    @users = @chatroom.users.where.not(id: current_user.id)
     @messages = @chatroom.messages.includes(:user).order(created_at: :asc).limit(Settings.limit.messages)
     @chatroom_user = current_user.chatroom_users.find_by(chatroom_id: @chatroom.id)
   end
@@ -57,5 +59,9 @@ class ChatroomsController < ApplicationController
 
   def chatroom_params
     params.require(:chatroom).permit(:name)
+  end
+
+  def load_chatrooms
+    @chatrooms = Chatroom.includes(:users).public_channels.page(params[:page]).per(10)
   end
 end

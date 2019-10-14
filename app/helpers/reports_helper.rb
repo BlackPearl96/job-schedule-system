@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ReportsHelper
-  URI = ENV['uri_slack']
+  URI = ENV["uri_slack"]
 
   def call_api_slack(channel)
     send_slack_notification(["```#{params[:reports]}```"].join, channel)
@@ -11,8 +11,9 @@ module ReportsHelper
     @reports.map { |r| [
                         "<b>Name</b>: #{r.task.title}<br>",
                         "<b>Permission</b>: #{r.task.color}<br>",
-                        "<b>Start</b>: #{r.task.start}<br>",
-                        "<b>End</b>: #{r.task.end}<br>", "<br>"
+                        "<b>Progress</b>: #{r.task.progress}<br>",
+                        "<b>Start</b>: #{r.task.start.strftime("%T %F")}<br>",
+                        "<b>End</b>: #{r.task.end.strftime("%T %F")}<br>", "<br>"
                         ] }.join("\n")
   end
 

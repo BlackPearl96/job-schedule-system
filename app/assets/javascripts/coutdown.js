@@ -8,8 +8,6 @@ var countdown = function() {
     }
   });
 }
-$(document).ready(function(){
+$(document).ready(function() {
   countdown();
 });
-
-$(document).on('page:update', countdown);

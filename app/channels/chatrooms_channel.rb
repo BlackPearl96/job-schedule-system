@@ -15,6 +15,6 @@ class ChatroomsChannel < ApplicationCable::Channel
   def send_message(data)
     @chatroom = Chatroom.find(data["chatroom_id"])
     message   = @chatroom.messages.create(body: data["body"], user: current_user)
-    MessageSaveJob.perform_later(message)
+    MessageSaveJob.perform_now(message)
   end
 end

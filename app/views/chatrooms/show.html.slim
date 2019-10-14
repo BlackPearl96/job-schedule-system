@@ -4,7 +4,7 @@
   .messaging
     .inbox_msg
       .inbox_people
-        - if @users.present?
+        - if !@chatroom.direct_message
           = render "chatrooms/user_list"
       .mesgs
         .msg_history#messages data-chatroom-id="#{ @chatroom.id }" data-user-id="#{ current_user.id }"

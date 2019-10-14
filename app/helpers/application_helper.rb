@@ -20,4 +20,16 @@ module ApplicationHelper
   def count_user_chatrooms(chatroom)
     ChatroomUser.where(chatroom_id: chatroom.id).count
   end
+
+  def message_present(user)
+    user.messages.where(chatroom_id: @chatroom.id).exists?
+  end
+
+  def last_message(user)
+    user.messages.where(chatroom_id: @chatroom.id).last&.body
+  end
+
+  def load_direct_message_rooms
+    current_user.chatrooms.direct_messages.includes(:users)
+  end
 end
